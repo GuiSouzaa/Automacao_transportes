@@ -2,14 +2,13 @@ import pandas as pd  # type: ignore
 import openpyxl  # type: ignore
 
 
-#Essa funcao le somente a coluna B e extrai todos os dados
+# Essa função lê somente a coluna B e extrai todos os dados
 def lerFormularioLimpo():
-
     colunab = 'B'
     dados_limpos = pd.read_excel('limpar_dados.xlsx', usecols=colunab)
     return dados_limpos
 
-def inserirDadosEmCelulas(dados_limpos, planilhaTransportes='Formulário atualizado H9J.xlsx', planilha_final='Formulario - xxx.xlsx'):
+def inserirDadosEmCelulas(dados_limpos, planilhaTransportes='Formulario new.xlsx', planilha_final='Formulario - xxx.xlsx'):
     # Carregar a planilha de destino    
     wb = openpyxl.load_workbook(planilhaTransportes)
     ws = wb.active  # Use a aba ativa
@@ -26,7 +25,34 @@ def inserirDadosEmCelulas(dados_limpos, planilhaTransportes='Formulário atualiz
     wb.save(planilha_final)
     print(f"Dados inseridos e salvos em '{planilha_final}'.")
 
+    return wb  # Retornar o workbook para uso em outras funções
+
+# Função para gerar a mensagem personalizada
+def gerarMensagem(wb):
+    ws = wb.active  # Acessar a aba ativa do workbook
+    endereco = ws['W13'].value  # Pegar o valor da célula W13
+    nome = ws['S20'].value  # Supondo que o nome está em W10 (ajuste se necessário)
+
+    # Validar se os valores foram encontrados
+    if not endereco or not nome:
+        print("Erro: Não foi possível encontrar todos os dados necessários para gerar a mensagem.")
+        return
+
+    # Mensagem personalizada
+    mensagem = f"""
+    Solicitação:
+    
+    Nota de trabalho: Envio via correios
+    
+    OS: xxxx - Endereço de envio: {endereco}
+    A/C: {nome}
+    
+    Prazo para a entrega é de 5 dias úteis
+    """
+    print(mensagem)
+
 # Chamando as funções
 dados = lerFormularioLimpo()
 if dados is not None:
-    inserirDadosEmCelulas(dados)
+    workbook = inserirDadosEmCelulas(dados)
+    gerarMensagem(workbook)
