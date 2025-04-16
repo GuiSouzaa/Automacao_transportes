@@ -26,13 +26,13 @@ Se estiver utilizando Linux, você pode substituir o Excel pelo [LibreOffice](ht
    ```bash
    git clone https://github.com/GuiSouzaa/Automacao_transportes.git
    
-Instale as dependências no terminal do visual studio:
+## Instale as dependências no terminal do visual studio:
 
 pip install pandas
 pip install openpyxl
 
 
-🛠️ Tecnologias utilizadas:
+#🛠️ Tecnologias utilizadas:
 
 Python
 pandas
