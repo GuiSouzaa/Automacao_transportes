@@ -29,6 +29,7 @@ Se estiver utilizando Linux, você pode substituir o Excel pelo [LibreOffice](ht
 ## Instale as dependências no terminal do visual studio:
 
 pip install pandas
+
 pip install openpyxl
 
 
