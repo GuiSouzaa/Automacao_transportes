@@ -32,7 +32,7 @@ pip install pandas
 pip install openpyxl
 
 
-#🛠️ Tecnologias utilizadas:
+##🛠️ Tecnologias utilizadas:
 
 Python
 pandas
